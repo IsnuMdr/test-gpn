@@ -126,7 +126,7 @@ const HomePage = () => {
                 </label>
                 <input
                   type="datetime-local"
-                  className="block px-3 py-1.5 text-base font-normal rounded-sm bg-clip-padding border border-solid first-letter:rounded transition ease-in-out m-0  focus:border-purple-600 focus:outline-none bg-gray-300 border-gray-300 dark:bg-gray-600 darkborder-gray-600"
+                  className="block px-3 py-1.5 text-base font-normal rounded-sm bg-clip-padding border border-solid first-letter:rounded transition ease-in-out m-0  focus:border-purple-600 focus:outline-none bg-gray-300 border-gray-300 dark:bg-gray-600 dark:border-gray-600"
                   name="startDate"
                   value={startDate}
                   onChange={handleChangeFilter}

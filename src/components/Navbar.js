@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ThemeConsumer } from "../contexts/ThemeContext";
 import { BsMoon, BsSun } from "react-icons/bs";
 import { FiLogOut, FiUser } from "react-icons/fi";

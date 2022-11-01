@@ -88,7 +88,7 @@ const GuardActivityTable = ({ currentActivities, loading }) => {
                         </td>
                         <td className="flex justify-center py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
-                            className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-300 dark:bg-purple-600 text-purple-800 hover:bg-purple-800 hover:text-gray-50"
+                            className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-300 dark:bg-purple-600 text-gray-200 hover:bg-purple-800 hover:text-gray-50"
                             onClick={() => setDataActivity(activity)}
                           >
                             View
