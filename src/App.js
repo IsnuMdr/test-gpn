@@ -30,6 +30,7 @@ function App() {
     await login(adminpetugasusername, password)
       .then((res) => {
         localStorage.setItem("user", JSON.stringify(res.data));
+        setDataUser(res.data);
         setLoggedIn(true);
       })
       .catch((error) => {
@@ -72,13 +73,22 @@ function App() {
         <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
           <Sidebar showSidebarMobile={showSidebarMobile} />
           <div className="flex flex-col flex-1 w-full">
-            <Navbar setShowSidebarMobile={setShowSidebarMobile} />
+            <Navbar
+              dataUser={dataUser}
+              setShowSidebarMobile={setShowSidebarMobile}
+            />
             <Routes>
               <Route
                 path="/"
-                element={loggedIn ? <Navigate to="/home" /> : <HomePage />}
+                element={
+                  loggedIn ? (
+                    <Navigate to="/home" />
+                  ) : (
+                    <HomePage dataUser={dataUser} />
+                  )
+                }
               />
-              <Route path="/home" element={<HomePage />} />
+              <Route path="/home" element={<HomePage dataUser={dataUser} />} />
               <Route
                 path="/profile"
                 element={<ProfilePage dataUser={dataUser} />}

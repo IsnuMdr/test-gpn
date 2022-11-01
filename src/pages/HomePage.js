@@ -4,7 +4,7 @@ import GuardActivityTable from "../components/GuardActivityTable";
 import { Pagination } from "../components/Pagination";
 import { GoVerified, GoUnverified } from "react-icons/go";
 
-const HomePage = () => {
+const HomePage = ({ dataUser }) => {
   const [guardActivities, setGuardActivities] = useState([]);
   const [totalActivities, setTotalActivities] = useState(0);
   const [unVerified, setUnVerified] = useState(0);
@@ -39,15 +39,12 @@ const HomePage = () => {
   const paginateFront = () => setCurrentPage(currentPage + 1);
   const paginateBack = () => setCurrentPage(currentPage - 1);
 
-  const dataUser = JSON.parse(localStorage.getItem("user"));
-  const token = dataUser.access_token;
-
   useEffect(() => {
     const fetchData = async () => {
       await axios({
         method: "POST",
         url: "https://dev-be.trijagabaya.co.id/api/satpam-kegiatan/",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${dataUser.access_token}` },
       }).then((res) => {
         setGuardActivities(res.data.data);
         setTotalActivities(res.data.jumlah_data);
