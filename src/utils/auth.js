@@ -13,9 +13,18 @@ export const login = async (adminpetugasusername, password) => {
       }
     );
     if (res.status === 200) {
+      localStorage.getItem("user", JSON.stringify(res.data));
       return res;
     }
   } catch (error) {
     return false;
   }
+};
+
+export const logout = () => {
+  localStorage.removeItem("user");
+};
+
+export const getCurrentUser = () => {
+  return JSON.parse(localStorage.getItem("user"));
 };

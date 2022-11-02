@@ -1,10 +1,10 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import { login } from "./utils/auth";
+import { getCurrentUser, login, logout, parseJwt } from "./utils/auth";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 import "./assets/style.css";
@@ -15,6 +15,8 @@ function App() {
   const [theme, setTheme] = useState("");
   const [showSidebarMobile, setShowSidebarMobile] = useState(false);
   const [dataUser, setDataUser] = useState(null);
+
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     const root = document.getElementsByTagName("html")[0];
@@ -29,7 +31,6 @@ function App() {
   const onLogin = async (adminpetugasusername, password) => {
     await login(adminpetugasusername, password)
       .then((res) => {
-        localStorage.setItem("user", JSON.stringify(res.data));
         setDataUser(res.data);
         setLoggedIn(true);
       })
@@ -39,10 +40,16 @@ function App() {
   };
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("user");
+    const isLoggedIn = getCurrentUser();
     if (isLoggedIn !== null) {
-      setLoggedIn(true);
-      setDataUser(JSON.parse(isLoggedIn));
+      if (isLoggedIn.expires_in * 1000 < Date.now()) {
+        setLoggedIn(false);
+        logout();
+        navigate("/");
+      } else {
+        setLoggedIn(true);
+        setDataUser(JSON.parse(isLoggedIn));
+      }
     } else {
       setLoggedIn(false);
     }
