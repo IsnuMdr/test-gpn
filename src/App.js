@@ -31,6 +31,7 @@ function App() {
   const onLogin = async (adminpetugasusername, password) => {
     await login(adminpetugasusername, password)
       .then((res) => {
+        localStorage.getItem("user", JSON.stringify(res.data));
         setDataUser(res.data);
         setLoggedIn(true);
       })
@@ -42,7 +43,9 @@ function App() {
   useEffect(() => {
     const isLoggedIn = getCurrentUser();
     if (isLoggedIn !== null) {
-      if (isLoggedIn.expires_in * 1000 < Date.now()) {
+      const decodedJwt = parseJwt(isLoggedIn.access_token);
+
+      if (decodedJwt.exp * 1000 < Date.now()) {
         setLoggedIn(false);
         logout();
         navigate("/");
@@ -81,6 +84,7 @@ function App() {
           <Sidebar showSidebarMobile={showSidebarMobile} />
           <div className="flex flex-col flex-1 w-full">
             <Navbar
+              setLoggedIn={setLoggedIn}
               dataUser={dataUser}
               setShowSidebarMobile={setShowSidebarMobile}
             />

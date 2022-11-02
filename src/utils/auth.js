@@ -13,7 +13,6 @@ export const login = async (adminpetugasusername, password) => {
       }
     );
     if (res.status === 200) {
-      localStorage.getItem("user", JSON.stringify(res.data));
       return res;
     }
   } catch (error) {
@@ -27,4 +26,12 @@ export const logout = () => {
 
 export const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
+};
+
+export const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split(".")[1]));
+  } catch (e) {
+    return null;
+  }
 };

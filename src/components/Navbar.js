@@ -6,7 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../utils/auth";
 
-const Navbar = ({ dataUser, setShowSidebarMobile }) => {
+const Navbar = ({ dataUser, setLoggedIn, setShowSidebarMobile }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -77,6 +77,7 @@ const Navbar = ({ dataUser, setShowSidebarMobile }) => {
                     className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                     onClick={() => {
                       logout();
+                      setLoggedIn(false);
                       navigate("/");
                     }}
                   >
