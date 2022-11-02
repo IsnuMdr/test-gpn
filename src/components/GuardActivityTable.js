@@ -51,7 +51,7 @@ const GuardActivityTable = ({ currentActivities, loading }) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-300">
-                  {currentActivities.length < 0 ? (
+                  {currentActivities?.length < 0 ? (
                     <tr className="text-center">
                       <td colSpan="6" className="px-6 py-4 whitespace-nowrap">
                         Data not found
@@ -64,26 +64,26 @@ const GuardActivityTable = ({ currentActivities, loading }) => {
                       </td>
                     </tr>
                   ) : (
-                    currentActivities.map((activity) => (
-                      <tr key={activity.satpamkegiatankode}>
+                    currentActivities?.map((activity) => (
+                      <tr key={activity?.satpamkegiatankode}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm font-medium">
-                            {activity.satpamkegiatankode}
+                            {activity?.satpamkegiatankode}
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm">
-                            {activity.satpamperusahaannama}
+                            {activity?.satpamperusahaannama}
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm">
-                            {activity.satpamnamalengkap}
+                            {activity?.satpamnamalengkap}
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm">
-                            {activity.satpamkegiatanuraian}
+                            {activity?.satpamkegiatanuraian}
                           </div>
                         </td>
                         <td className="flex justify-center py-4 whitespace-nowrap text-right text-sm font-medium">

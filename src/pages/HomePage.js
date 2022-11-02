@@ -57,6 +57,7 @@ const HomePage = ({ dataUser }) => {
 
   const handleFilterData = (e) => {
     e.preventDefault();
+    setDataFiltered("");
 
     const filteredData = guardActivities.filter((activity) => {
       return (

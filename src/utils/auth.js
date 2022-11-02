@@ -13,6 +13,8 @@ export const login = async (adminpetugasusername, password) => {
       }
     );
     if (res.status === 200) {
+      console.log(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data));
       return res;
     }
   } catch (error) {

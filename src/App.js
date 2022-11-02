@@ -31,7 +31,6 @@ function App() {
   const onLogin = async (adminpetugasusername, password) => {
     await login(adminpetugasusername, password)
       .then((res) => {
-        localStorage.getItem("user", JSON.stringify(res.data));
         setDataUser(res.data);
         setLoggedIn(true);
       })
@@ -50,9 +49,8 @@ function App() {
         logout();
         navigate("/");
       } else {
-        setDataUser(isLoggedIn.user);
+        setDataUser(isLoggedIn);
         setLoggedIn(true);
-        setDataUser(JSON.parse(isLoggedIn));
       }
     } else {
       setLoggedIn(false);
@@ -90,16 +88,7 @@ function App() {
               setShowSidebarMobile={setShowSidebarMobile}
             />
             <Routes>
-              <Route
-                path="/"
-                element={
-                  loggedIn ? (
-                    <Navigate to="/home" />
-                  ) : (
-                    <HomePage dataUser={dataUser} />
-                  )
-                }
-              />
+              <Route path="/" element={<HomePage dataUser={dataUser} />} />
               <Route path="/home" element={<HomePage dataUser={dataUser} />} />
               <Route
                 path="/profile"
@@ -115,7 +104,11 @@ function App() {
             <Route
               path="/"
               element={
-                loggedIn ? <Navigate to="/" /> : <LoginPage onLogin={onLogin} />
+                loggedIn ? (
+                  <Navigate to="/home" />
+                ) : (
+                  <LoginPage onLogin={onLogin} />
+                )
               }
             />
             <Route path="*" element={<Navigate to="/" replace />} />
