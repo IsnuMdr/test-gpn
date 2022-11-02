@@ -50,6 +50,7 @@ function App() {
         logout();
         navigate("/");
       } else {
+        setDataUser(isLoggedIn.user);
         setLoggedIn(true);
         setDataUser(JSON.parse(isLoggedIn));
       }

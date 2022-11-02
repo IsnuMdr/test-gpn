@@ -58,7 +58,7 @@ const HomePage = ({ dataUser }) => {
   const handleFilterData = (e) => {
     e.preventDefault();
 
-    const filteredData = currentActivities.filter((activity) => {
+    const filteredData = guardActivities.filter((activity) => {
       return (
         startDate < activity.satpamkegiatantanggal &&
         activity.satpamkegiatantanggal < endDate
